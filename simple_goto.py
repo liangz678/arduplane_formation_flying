@@ -18,17 +18,28 @@ parser.add_argument('-v2',
                     help="Vehicle2 connection target string.", nargs='?', const="127.0.0.1:12342", type=str)
 args = parser.parse_args()
 
+
+parser.add_argument('-vu1',
+                     help="Vehicle1 connection target string.")
+parser.add_argument('-vu2',
+                    help="Vehicle2 connection target string.")
+
+args = parser.parse_args()
+
+if args.vu1 and args.vu2:
+    v1 = connect(args.vu1)
+    v2 = connect(args.vu2, vehicle_class=Wingman)
+else:
+    v1 = connect(args.v1)
+    v2 = connect(args.v2, vehicle_class=Wingman)
+
+
 print(args)
 C = 80
 drift = -20
 
 
-# Connect to the Vehicle
-print("正在链接")
-vehicle1 = connect(args.v1)
-vehicle2 = connect(args.v2, vehicle_class=Wingman)
 print("链接成功")
-
 vehicle2.aspd2thr = [
     {"thr": 10, "aspd": 10},
     {"thr": 20, "aspd": 12},
@@ -40,7 +51,7 @@ vehicle2.min_speed = 10
 vehicle2.max_speed = 30
 
 pid = PID(0.3, 0.01, 0.1)
-pid.target = 10
+pid.target = 0
 
 while True:
     pos = vehicle1.location.global_relative_frame

@@ -23,8 +23,8 @@ parser.add_argument('-vu2',
 args = parser.parse_args()
 
 if args.vu1 and args.vu2:
-    v1 = connect(args.vu1)
-    v2 = connect(args.vu2, vehicle_class=Wingman)
+    v1 = connect(args.vu1,baud=57600)
+    v2 = connect(args.vu2, vehicle_class=Wingman, baud=57600)
 else:
     v1 = connect(args.v1)
     v2 = connect(args.v2, vehicle_class=Wingman)
