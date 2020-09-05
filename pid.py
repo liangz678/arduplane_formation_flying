@@ -59,7 +59,7 @@ class PID(object):
 
 
 
-        print(alpha, -1*self.Kp*error , -1*self.Ki * error * dt,-self.Kd*((feedback - self._prev_feedback) / float(dt)) )
+        #print(alpha, -1*self.Kp*error , -1*self.Ki * error * dt,-self.Kd*((feedback - self._prev_feedback) / float(dt)) )
         # Maintain memory for next loop.
         self._prev_tm = curr_tm
         self._prev_feedback = feedback
